@@ -1,0 +1,7 @@
+{{- range $_, $cluster := .clusters }}
+{{- range $i, $forward := $cluster.forwards }}
+{{$forward.alias}}: sudo kubectl --kubeconfig={{$cluster.kubeconfig | default "${HOME}/.kube/config"}} port-forward  -n {{$forward.namespace}} {{$forward.type}}/{{$forward.name}}{{- range $_, $port := $forward.ports }} {{$port.local}}:{{$port.remote}}{{- end}}
+{{- end}}
+{{- end}}
+
+

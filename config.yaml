@@ -1,0 +1,11 @@
+clusters:
+  - name: cluster1
+    kubeconfig: ${HOME}/.kube/config
+    forwards:
+      - namespace: kube-system
+        type: service
+        name: kube-dns
+        alias: kube-dns.kube-system.svc.cluster.local
+        ports:
+          - local: 53
+            remote: 53
